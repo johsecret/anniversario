@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>365 giorni</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #countdown {
+            font-size: 2em;
+            font-weight: bold;
+          display: block;
+        }
+      #message {
+        display: none;
+      }
+    </style>
+</head>
+<body>
+    <h1>365 giorni❤</h1>
+    <p id="countdown"></p>
+  <p id="message">Inserisci qui il messaggio di fine countdown</p>
+
+  <script>
+        // Set the target date (YYYY-MM-DD format)
+        const targetDate = new Date("2025-04-06T23:59:59").getTime();
+
+        // Get countdown and message elements
+        const countdownElement = document.getElementById('countdown');
+        const messageElement = document.getElementById('message');
+
+        // Update the countdown every second
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            // When the countdown reaches zero
+            if (timeLeft <= 0) {
+                clearInterval(timer); // Stop the timer
+                countdownElement.style.display = 'none'; // Hide countdown
+                messageElement.style.display = 'block'; // Show message
+                return;
+            }
+
+            // Calculate time units
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }, 1000);
+    </script>
+
+</body>
+</html>
